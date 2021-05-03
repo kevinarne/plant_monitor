@@ -7,11 +7,10 @@ def read_light():
 		entry = ser.readline()
 		print(int(entry))
 	return entry
-
 while True:
-	usr = input("Would you like to continue?")
-	#time.sleep(3)
-	read_light()
-	if usr == "no":
+	usr = input("What would you like to do?")
+	if usr == "read sensor":
+		read_light()
+	elif usr == "exit":
 		break
-
+	#time.sleep(3)
