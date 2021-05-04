@@ -32,6 +32,6 @@ nano credentials
 Format with username on the first line and password on the second line. Save and exit (ctrl-s and ctrl-x)
 
 Initialize the table in the database
-run ptdbhandler.py
+run lightdbhandler.py
 
-You're all set
+You're all set.
