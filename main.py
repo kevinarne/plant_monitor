@@ -17,12 +17,13 @@ except:
 db = hndl.LightDBHandler("localhost", usr, pwd)
 
 while True:
-	usr = input("What would you like to do?")
-	if usr == "read sensor":
-		entry = read_light()
-		db.add_value(entry)
-	elif usr == "exit":
-		break
-	else:
-		print("I'm sorry, thats not a valid options. The valid options are:\n - read sensor\n - exit")
-	#time.sleep(3)
+	entry = read_light()
+	db.add_value(entry)	
+	#usr = input("What would you like to do?")
+	#if usr == "read sensor":
+	#	
+	#elif usr == "exit":
+	#	break
+	#else:
+	#	print("I'm sorry, thats not a valid options. The valid options are:\n - read sensor\n - exit")
+	time.sleep(300)
