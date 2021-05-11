@@ -9,25 +9,29 @@ def read_light():
 	return int(entry)
 for x in range(5):
 	try:
-		with open("credentials","r") as f:
+		with open("scripts/lights/credentials","r") as f:
 			usr, pwd = f.read().strip().split()
 			break
 	except:
 		print("Credentials failed to load, please consult setup/README.md for instructions on setting up the mysql database credentials.")
+		with open("logs","a") as f:
+			f.write("Failed to load database\n")
 		time.sleep(3)
-		if x == 4:
-			exit()
+		#if x == 4:
+		#	exit()
 
 db = hndl.LightDBHandler("localhost", usr, pwd)
 
-while True:
-	entry = read_light()
-	db.add_value(entry)	
+with open("logs","a") as f:
+	f.write("attempting to log")
+
+entry = read_light()
+db.add_value(entry)
 	#usr = input("What would you like to do?")
 	#if usr == "read sensor":
-	#	
+	#
 	#elif usr == "exit":
 	#	break
 	#else:
 	#	print("I'm sorry, thats not a valid options. The valid options are:\n - read sensor\n - exit")
-	time.sleep(10)
+	#time.sleep(10)
