@@ -1,4 +1,5 @@
 import mysql.connector
+from datetime import datetime
 
 # Get credentials
 try:
