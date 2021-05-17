@@ -1,3 +1,4 @@
+import pymysql
 #File for managing some basic mysql tasks in plainer English
 class MySqlManager:
 	def __init__(self,cred_path,db_name = None):
@@ -9,10 +10,12 @@ class MySqlManager:
 		except:
 			print("Something went wrong loading the credentials, please check that the file exists and is formatted correctly")
 			exit()
-			#if dbname == none:
+		if db_name == None:
+			self.if_no_db()
 			#prompt user for dbname
-		self.db_name = db_name
-		print(self.username,self.pwd,self.host)
+		else:
+			self.db_name = db_name
+
 
 	def add_value(self, value):
 		print("Adding values")
@@ -41,13 +44,19 @@ class MySqlManager:
 			print("Creating database")
 			cur.execute("CREATE DATABASE " + db_name)
 
-	def set_db(self, db_name):
-		self.db = db_name
-
-	def if_no_db(self, db_name):
+	def if_no_db(self):
 		user_input = input("Please enter your database name or enter 0 if you need to create one")
-		create_db(self)
-		print("Database name needed")
+		if user_input == "0":
+			db_name = input("Please enter the desired databased name: ")
+			create_db(self, db_name)
+		else:
+			self.db_name = user_input
+
+	def export_table(self, table):
+		with pymysql.connect(host = self.host, user = self.username, password = self.pwd, database = self.db_name) as db:
+			cur = db.cursor()
+			cur.execute("SELECT * FROM " + table)
+			return cur.fetchall()
 
 class MySqlCol:
 	def __init__(self, name, atrs):
@@ -57,4 +66,5 @@ class MySqlCol:
 
 if __name__ == "__main__":
 	mngr = MySqlManager("credentials")
+	print(mngr.export_table("light_vals"))
 	pass
