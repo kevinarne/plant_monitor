@@ -47,5 +47,4 @@ if __name__ == "__main__":
 			exit()
 		dbhandler = LightDBHandler("localhost",user,pwd)
 		dbhandler.create_table("light_vals")
-		dbhandler.add_value(984)
 	print("Exiting")
