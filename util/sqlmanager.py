@@ -48,7 +48,8 @@ class MySqlManager:
 		user_input = input("Please enter your database name or enter 0 if you need to create one")
 		if user_input == "0":
 			db_name = input("Please enter the desired databased name: ")
-			create_db(self, db_name)
+			self.db_name = db_name
+			self.create_db(db_name)
 		else:
 			self.db_name = user_input
 
