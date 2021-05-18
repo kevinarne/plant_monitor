@@ -1,7 +1,7 @@
 import pymysql
 #File for managing some basic mysql tasks in plainer English
 class MySqlManager:
-	def __init__(self,cred_path,db_name = None):
+	def __init__(self, cred_path, db_name = None):
 		print("initializing")
 		#read the credentials file
 		try:
@@ -12,7 +12,6 @@ class MySqlManager:
 			exit()
 		if db_name == None:
 			self.if_no_db()
-			#prompt user for dbname
 		else:
 			self.db_name = db_name
 
@@ -31,12 +30,20 @@ class MySqlManager:
 			db.commit()
 
 	def create_table(self, tablename, primary, cols = None):
-		if cols == none:
-			pass
+		query = "CREATE TABLE " + tablename + " (" + primary.to_str()
+		if cols == None:
+			query += ", PRIMARY KEY(" + primary.name + "))"
+			print(query)
 		else:
-			pass
-		query = "CREATE TABLE " + tablename + " (id INT NOT NULL AUTO_INCREMENT, val INT NOT NULL, datetime VARCHAR(30) NOT NULL, PRIMARY KEY(id))"
-		self.execute_mysql(query,())
+			for num, col in enumerate(cols):
+				if num == 0:
+					pass
+				else:
+					pass
+				print(num)
+				print(col.to_str())
+		#query = "CREATE TABLE " + tablename + " (id INT NOT NULL AUTO_INCREMENT, val INT NOT NULL, datetime VARCHAR(30) NOT NULL, PRIMARY KEY(id))"
+		#self.execute_mysql(query,())
 
 	def create_db(self, db_name):
 		with pymysql.connect(host = self.host, user = self.username, password = self.pwd) as db:
@@ -60,12 +67,13 @@ class MySqlManager:
 			return cur.fetchall()
 
 class MySqlCol:
-	def __init__(self, name, atrs):
+	def __init__(self, name, attrs):
 		self.name = name
-		self.atrs = atr
-
+		self.attrs = attrs
+	def to_str(self):
+		return str(self.name + " " + self.attrs)
 
 if __name__ == "__main__":
-	mngr = MySqlManager("credentials")
-	print(mngr.export_table("light_vals"))
+	mngr = MySqlManager("credentials", db_name = "lights")
+	mngr.create_table("test_table", MySqlCol("id","ATTR1"), cols=[MySqlCol("test2","ATTR2"),MySqlCol("test3","ATTR3")])
 	pass
