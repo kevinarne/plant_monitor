@@ -27,16 +27,19 @@ class MySqlManager:
 				exit()
 
 	def add_values(self, tablename, cols, values):
-		print("Adding values")
-		query = "INSERT INTO " + tablename + "("
-		for n, col in enumerate(cols):
-			if n == len(cols) - 1:
-				query += col
-			else:
-				query += col + ", "
-		query += ") VALUES (" + (len(cols)-1) * "%s," + "%s)"
-		print(query)
-		#self.execute_mysql("INSERT INTO light_vals (datetime, val) VALUES (%s,%s)",(datetime.now().isoformat(),value))
+		try:
+			print("Adding values")
+			query = "INSERT INTO " + tablename + " ("
+			for n, col in enumerate(cols):
+				if n == len(cols) - 1:
+					query += col
+				else:
+					query += col + ", "
+			query += ") VALUES (" + (len(cols)-1) * "%s," + " %s)"
+			print(query)
+			self.execute_mysql(query, values)
+		except:
+			print("Something went wrong adding the values to the table. Make sure you provided the correct table name and values for that table. You may not have the appropriate permissions either.")
 
 	def execute_mysql(self, query, vals):
 		with pymysql.connect(host = self.host, user = self.username, password = self.pwd, database = self.db_name) as db:
@@ -44,7 +47,7 @@ class MySqlManager:
 			if len(vals) == 0:
 				cur.execute(query)
 			else:
-				cur.execute(query,vals)
+				cur.execute(query, vals)
 			db.commit()
 
 	def create_table(self, tablename, primary, cols = None):
@@ -107,4 +110,4 @@ if __name__ == "__main__":
 		mngr.create_table("event_codes", MySqlCol.id_primary(), cols = [MySqlCol("description","VARCHAR(140)")])
 		pass
 	print("testing table addition")
-	mngr.add_values("plants", ["nickname", "notes"],["test nickname", "test notes"])
+	mngr.add_values("plants", ["nickname", "notes"],["Ficus", "Had for around 10 years. Bit of a drama queen."])
