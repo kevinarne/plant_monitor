@@ -26,9 +26,17 @@ class MySqlManager:
 				print("Database connection still failed, check your credentials and the permissions of your database.")
 				exit()
 
-	def add_value(self, value):
+	def add_values(self, tablename, cols, values):
 		print("Adding values")
-		self.execute_mysql("INSERT INTO light_vals (datetime, val) VALUES (%s,%s)",(datetime.now().isoformat(),value))
+		query = "INSERT INTO " + tablename + "("
+		for n, col in enumerate(cols):
+			if n == len(cols) - 1:
+				query += col
+			else:
+				query += col + ", "
+		query += ") VALUES (" + (len(cols)-1) * "%s," + "%s)"
+		print(query)
+		#self.execute_mysql("INSERT INTO light_vals (datetime, val) VALUES (%s,%s)",(datetime.now().isoformat(),value))
 
 	def execute_mysql(self, query, vals):
 		with pymysql.connect(host = self.host, user = self.username, password = self.pwd, database = self.db_name) as db:
@@ -98,3 +106,5 @@ if __name__ == "__main__":
 		#Create event_codes table
 		mngr.create_table("event_codes", MySqlCol.id_primary(), cols = [MySqlCol("description","VARCHAR(140)")])
 		pass
+	print("testing table addition")
+	mngr.add_values("plants", ["nickname", "notes"],["test nickname", "test notes"])
