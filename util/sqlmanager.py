@@ -75,8 +75,14 @@ class MySqlCol:
 		return MySqlCol("id", "INT NOT NULL AUTO_INCREMENT")
 
 class Table:
-	def __init__(self):
+	def __init__(self, primary, cols):
+		self.primary = MySqlCol.id_primary()
+		self.cols = []
+	def get_primary(self):
 		pass
+	def get_cols(self):
+		pass
+
 
 if __name__ == "__main__":
 	mngr = MySqlManager("credentials", "lights")
