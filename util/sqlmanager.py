@@ -109,5 +109,5 @@ if __name__ == "__main__":
 		#Create event_codes table
 		mngr.create_table("event_codes", MySqlCol.id_primary(), cols = [MySqlCol("description","VARCHAR(140)")])
 		pass
-	print("testing table addition")
-	mngr.add_values("plants", ["nickname", "notes"],["Ficus", "Had for around 10 years. Bit of a drama queen."])
+	#print("testing table addition")
+	#mngr.add_values("plants", ["nickname", "notes"],["Ficus", "Had for around 10 years. Bit of a drama queen."])

@@ -6,3 +6,4 @@ if user_inp == "y":
     notes = input("Please type any notes about the plant and press enter. ")
     mngr = sqlmanager.MySqlManager("util/credentials", "lights")
     print(name,notes)
+    mngr.add_values("plants",["nickname","notes"], [name, notes])
