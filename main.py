@@ -10,7 +10,7 @@ def read_light():
 for x in range(5):
 	try:
 		with open("scripts/lights/credentials","r") as f:
-			usr, pwd = f.read().strip().split()
+			usr, pwd, host = f.read().strip().split()
 			break
 	except:
 		print("Credentials failed to load, please consult setup/README.md for instructions on setting up the mysql database credentials.")
