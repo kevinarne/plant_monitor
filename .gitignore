@@ -1,3 +1,6 @@
 util/credentials
+credentials
 plant_monitor_env
 util/__pycache__
+__pycache__
+logs
