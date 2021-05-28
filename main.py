@@ -17,6 +17,9 @@ while True:
 		addplants.addplant("util/credentials", name, notes)
 	elif uinp == "add weight":
 		print("Add weight")
+	elif uinp == "add sensor":
+		print("Adding sensor")
+
 	else:
 		print("Sorry, that's not one of the menu options. To exit type exit")
 	uinp = input("What would you like to do? ").lower()

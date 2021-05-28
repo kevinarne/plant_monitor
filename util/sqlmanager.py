@@ -28,7 +28,6 @@ class MySqlManager:
 
 	def add_values(self, tablename, cols, values):
 		try:
-			print("Adding values")
 			query = "INSERT INTO " + tablename + " ("
 			for n, col in enumerate(cols):
 				if n == len(cols) - 1:
@@ -36,7 +35,6 @@ class MySqlManager:
 				else:
 					query += col + ", "
 			query += ") VALUES (" + (len(cols)-1) * "%s," + " %s)"
-			print(query)
 			self.execute_mysql(query, values)
 		except:
 			print("Something went wrong adding the values to the table. Make sure you provided the correct table name and values for that table. You may not have the appropriate permissions either.")
