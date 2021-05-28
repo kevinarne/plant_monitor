@@ -1,7 +1,7 @@
 # Main script to manage all user-facing activities like adding new plants,
 # creating new event codes, adding manual events (like actual weights),
 # pulling up visualizations of the data, etc
-import addplants
+import addentries
 
 uinp = input("What would you like to do? ").lower()
 
