@@ -14,11 +14,18 @@ while True:
 		print("Adding plants")
 		name = input("What would you like to call this plant? ")
 		notes = input("Please type any notes about your plant here: ")
-		addplants.addplant("util/credentials", name, notes)
+		addentries.addplant("util/credentials", name, notes)
 	elif uinp == "add weight":
 		print("Add weight")
 	elif uinp == "add sensor":
 		print("Adding sensor")
+		description = input("Please describe this sensor: ")
+		active = "y"
+		type = input("What type of sensor is this (use correct id number)? ")
+		units = input("What are the units of measurement? ")
+		subscribed = input("Which plants are subscribed to this sensor (separate id #s by commas)? ")
+		schedule = input("What schedule should this be polled at (use crontab notation)? ")
+		addentries.addsensor("util/credentials", description, active, type, schedule, units, subscribed)
 
 	else:
 		print("Sorry, that's not one of the menu options. To exit type exit")

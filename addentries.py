@@ -5,9 +5,12 @@ def addplant(credpath, nickname, notes):
 	mngr = sqlmanager.MySqlManager(credpath, "lights")
 	mngr.add_values("plants", ["nickname", "notes"], [nickname, notes])
 
-def addsensor(credpath):
+def addsensor(credpath, description, active, type, schedule, units, subscribed):
 	mngr = sqlmanager.MySqlManager(credpath, "lights")
-	
+	mngr.add_values("sensors",
+		["description","active","type","schedule","units","subscribed"],
+		[description, active, type, schedule, units, subscribed])
+
 
 if __name__ == "__main__":
 	user_inp = input("Would you like to add a plant [y/n]? ")
