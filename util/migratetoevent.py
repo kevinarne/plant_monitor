@@ -3,6 +3,11 @@ import sqlmanager as my
 mngr = my.MySqlManager("credentials", "lights")
 entries = mngr.export_table("light_vals")
 # Iterate through entries
+plants = [2,3,4,5]
 for entry in entries:
     print(entry)
-# Add to event table for each plant (which means 4x entries for each light reading)
+    for plant in plants:
+        cols = ["code","datetime","val","plant","notes"]
+        vals = [1,entry[2],entry[1],plant,"From sensor 1"]
+        #mngr.add_values("plant_events", cols, vals)
+        print(vals)
