@@ -3,20 +3,21 @@ import serial
 from datetime import datetime
 from util import sqlmanager
 
-try:
-	cred_path = sys.argv[1]
-	print(cred_path)
-except:
-	print("No credential path supplied.")
-	exit()
-
 def read_light():
 	with serial.Serial("/dev/ttyUSB0", 9600, timeout=10) as ser:
 		entry = ser.readline()
 		print(int(entry))
 	return int(entry)
-	
+
 if __name__ == "__main__":
+	try:
+		cred_path = sys.argv[1]
+		print(cred_path)
+	except:
+		print("No credential path supplied.")
+		exit()
+
+	sensorid = 1
 	try:
 	#"scripts/lights/credentials"
 		with open(cred_path,"r") as f:
@@ -31,4 +32,8 @@ if __name__ == "__main__":
 
 	entry = read_light()
 
-	mngr.add_values("light_vals", ["val","datetime"], [entry, datetime.now().isoformat()])
+	plants = [2,3,4,5]
+	for plant in plants:
+		mngr.add_values("plant_events",
+		["code","datetime","val","plant","notes"],
+		[1,datetime.now().isoformat(),entry, plant, "From sensor " + str(sensorid)])
