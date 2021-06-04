@@ -7,14 +7,12 @@ The script reads from the light sensor every 10 minutes and stores that value in
 
 # Potential Next Steps
 * Visualize the collected light sensor data
-* Migrate light values to plant_events table
-* Wire the strain gage for measuring weight
+* Redesign strain gauge board
 * Create interface for adding new plants
 * Create database backup
 
 # Current Tables
-* light_vals - Tracks the values coming off the CdS light sensor wired to an Arduino Nano. Will eventually be deprecated by plant_events.
-* plant_events - Eventually will track all values recorded by various sensors, their associated plants, and things like watering, repotting, pruning, weighing, and even light.
+* plant_events - Tracks values recorded by various sensors, their associated plants, and things like watering, repotting, pruning, weighing, and even light. Currently it only tracks light.
 * plants - Dictionary relating ids used in plant_events and actual plants.
 * event_codes - Dictionary correlating events with unique ids.
 
