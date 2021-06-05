@@ -6,10 +6,12 @@ I hope to use the data to improve growing conditions, particularly in the winter
 The script reads from the light sensor every 10 minutes and stores that value in the database. Another potential next step is to add more tables to the database to track other pieces of information that I record, such as the daily weight. I'd also like to capture events like watering, repotting, pruning, and so on.
 
 # Potential Next Steps
+* Add a way to manually add weights to the plant_events table.
 * Visualize the collected light sensor data
 * Redesign strain gauge board
 * Create interface for adding new plants
 * Create database backup
+* Switch to using environmental variables for credentials
 
 # Current Tables
 * plant_events - Tracks values recorded by various sensors, their associated plants, and things like watering, repotting, pruning, weighing, and even light. Currently it only tracks light.
