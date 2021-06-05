@@ -11,6 +11,9 @@ def addsensor(credpath, description, active, type, schedule, units, subscribed):
 		["description","active","type","schedule","units","subscribed"],
 		[description, active, type, schedule, units, subscribed])
 
+def addeventcode(credpath, description):
+	mngr = sqlmanager.MySqlManager(credpath, "lights")
+	mngr.add_values("event_codes", ["description"], [description])
 
 if __name__ == "__main__":
 	user_inp = input("Would you like to add a plant [y/n]? ")

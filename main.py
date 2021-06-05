@@ -22,7 +22,7 @@ while True:
 		if len(description) > 140:
 			print("Description too long, truncating to 140")
 			description = description[:139]
-		print(description)
+		addentries.addeventcode("util/credentials", description)
 	elif uinp == "add sensor":
 		print("Adding sensor")
 		description = input("Please describe this sensor: ")
