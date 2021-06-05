@@ -17,6 +17,12 @@ while True:
 		addentries.addplant("util/credentials", name, notes)
 	elif uinp == "add weight":
 		print("Add weight")
+	elif uinp == "add event code":
+		description = input("Please enter a description: 140 char max")
+		if len(description) > 140:
+			print("Description too long, truncating to 140")
+			description = description[:139]
+		addentries.addeventcode("util/credentials", description)
 	elif uinp == "add sensor":
 		print("Adding sensor")
 		description = input("Please describe this sensor: ")
