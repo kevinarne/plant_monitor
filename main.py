@@ -2,6 +2,7 @@
 # creating new event codes, adding manual events (like actual weights),
 # pulling up visualizations of the data, etc
 import addentries
+import datetime
 
 uinp = input("What would you like to do? ").lower()
 
@@ -17,6 +18,14 @@ while True:
 		addentries.addplant("util/credentials", name, notes)
 	elif uinp == "add weight":
 		print("Add weight")
+	elif uinp == "add event":
+		# Get event codes
+		# Ask user to pick event code
+		# Get details of event (datetime, val, plant, notes)
+		date = [int(x) for x in input("Please enter the year/month/day of the event: ").strip().split("/")]
+		if date[0]<2000:
+			date[0] += 2000
+		print(datetime.datetime(*date))
 	elif uinp == "add event code":
 		description = input("Please enter a description: 140 char max")
 		if len(description) > 140:
