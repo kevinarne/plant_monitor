@@ -37,7 +37,15 @@ while True:
 	if uinp == "exit":
 		exit()
 	elif uinp == "menu":
-		print("Now I'll display the menu: ")
+		print("Menu:")
+		print(" - add plant")
+		print(" - add weight")
+		print(" - add event")
+		print(" - add event code")
+		print(" - add sensor")
+		print(" - get values")
+		print(" - menu")
+		print(" - exit")
 	elif uinp == "add plant":
 		print("Adding plants")
 		addplant()
