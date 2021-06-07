@@ -55,7 +55,11 @@ while True:
 		# Get event codes
 		# Ask user to pick event code
 		# Get details of event (datetime, val, plant, notes)
+		code = input("Which event code is this? ")
 		date = getdateuser()
+		val = input("What is the value? ")
+		plant = input("Which plant does this correspond to? ")
+		notes = input("Please type any notes here: ")
 	elif uinp == "add event code":
 		addeventcode()
 	elif uinp == "add sensor":
