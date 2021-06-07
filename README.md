@@ -7,6 +7,7 @@ The script reads from the light sensor every 10 minutes and stores that value in
 
 # Potential Next Steps
 * Add a way to manually add weights to the plant_events table.
+* Transfer csv plant weights to plant_events table
 * Create a way to more generically add plant_event entries
 * Visualize the collected light sensor data
 * Redesign strain gauge board
