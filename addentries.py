@@ -15,6 +15,12 @@ def addeventcode(credpath, description):
 	mngr = sqlmanager.MySqlManager(credpath, "lights")
 	mngr.add_values("event_codes", ["description"], [description])
 
+def addevent(credpath, code, date, val, plant, notes):
+	mngr = sqlmanager.MySqlManager(credpath,"lights")
+	mngr.add_values("plant_events",
+		["code", "datetime", "val", "plant", "notes"],
+		[code, date, val, plant, notes])
+
 if __name__ == "__main__":
 	user_inp = input("Would you like to add a plant [y/n]? ")
 	if user_inp == "y":

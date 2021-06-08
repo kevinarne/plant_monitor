@@ -40,9 +40,11 @@ def addevent():
 	else:
 		# Get details of event (datetime, val, plant, notes)
 		date = getdateuser()
-		val = input("What is the value? ")
-		plant = input("Which plant does this correspond to? ")
+		val = int(input("What is the value, only use whole numbers? "))
+		plant = int(input("Which plant does this correspond to? "))
 		notes = input("Please type any notes here: ")
+		addentries.addevent("util/credentials", code, date.isoformat(), val, plant, notes)
+
 
 def getdateuser():
 	date = [int(x) for x in input("Please enter the year/month/day of the event: ").strip().split("/")]
