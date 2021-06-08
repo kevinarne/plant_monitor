@@ -33,13 +33,16 @@ def getdateuser():
 		date[0] += 2000
 	return datetime.datetime(*date)
 
+def getvals(table):
+	mngr = sqlmanager.MySqlManager("util/credentials","lights")
+	return mngr.export_table(table)
+
 while True:
 	if uinp == "exit":
 		exit()
 	elif uinp == "menu":
 		print("Menu:")
 		print(" - add plant")
-		print(" - add weight")
 		print(" - add event")
 		print(" - add event code")
 		print(" - add sensor")
@@ -49,17 +52,22 @@ while True:
 	elif uinp == "add plant":
 		print("Adding plants")
 		addplant()
-	elif uinp == "add weight":
-		print("Add weight")
 	elif uinp == "add event":
 		# Get event codes
+		vals = getvals("event_codes")
 		# Ask user to pick event code
-		# Get details of event (datetime, val, plant, notes)
-		code = input("Which event code is this? ")
-		date = getdateuser()
-		val = input("What is the value? ")
-		plant = input("Which plant does this correspond to? ")
-		notes = input("Please type any notes here: ")
+		for entry in vals:
+			print(entry[0],"-",entry[1])
+		ids = [x[0] for x in vals]
+		code = int(input("Which event code is this? "))
+		if code not in ids:
+			print("Code not valid.")
+		else:
+			# Get details of event (datetime, val, plant, notes)
+			date = getdateuser()
+			val = input("What is the value? ")
+			plant = input("Which plant does this correspond to? ")
+			notes = input("Please type any notes here: ")
 	elif uinp == "add event code":
 		addeventcode()
 	elif uinp == "add sensor":
