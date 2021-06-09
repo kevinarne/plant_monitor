@@ -2,7 +2,7 @@ import pymysql
 import decouple
 #File for managing some basic mysql tasks in plainer English
 class MySqlManager:
-	def __init__(self, cred_path, db_name):
+	def __init__(self, db_name):
 		self.db_name = db_name
 		# Check for database existence
 		self.host = decouple.config('HOST_NAME')
@@ -91,7 +91,7 @@ class Table:
 		pass
 
 def createtables():
-	mngr = MySqlManager("credentials", "lights")
+	mngr = MySqlManager("lights")
 	#Create database
 	#Create light_vals table
 	mngr.create_table("light_vals", MySqlCol.id_primary(), cols = [MySqlCol("val","INT"),

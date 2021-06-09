@@ -53,7 +53,7 @@ def getdateuser():
 	return datetime.datetime(*date)
 
 def getvals(table):
-	mngr = sqlmanager.MySqlManager("util/credentials","lights")
+	mngr = sqlmanager.MySqlManager("lights")
 	return mngr.export_table(table)
 
 def printmenu():

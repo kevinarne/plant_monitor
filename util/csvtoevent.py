@@ -2,7 +2,7 @@ import datetime
 import sqlmanager
 
 def postval(date, plant, val):
-    mngr = sqlmanager.MySqlManager("credentials","lights")
+    mngr = sqlmanager.MySqlManager("lights")
     mngr.add_values("plant_events",
         ["code", "datetime", "val", "plant", "notes"],
         [2, date.isoformat(), val, plant, "In ounces * 100"])

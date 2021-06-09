@@ -28,7 +28,7 @@ if __name__ == "__main__":
 		with open("logs","a") as f:
 			f.write("Failed to load database\n")
 
-	mngr = sqlmanager.MySqlManager(cred_path,"lights")
+	mngr = sqlmanager.MySqlManager("lights")
 
 	entry = read_light()
 
