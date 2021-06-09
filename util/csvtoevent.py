@@ -19,6 +19,6 @@ with open("plantweights.csv", "r") as f:
         date = datetime.datetime(int(mdy[2]), int(mdy[0]), int(mdy[1]))
         # Add each of the four plant weights for each date
         postval(date, 2, int(float(entrylist[1])*100))
-        postval(date, 3, int(float(entrylist[2])*100))
-        postval(date, 4, int(float(entrylist[3])*100))
-        postval(date, 5, int(float(entrylist[4])*100))
+        postval(date, 4, int(float(entrylist[2])*100))
+        postval(date, 5, int(float(entrylist[3])*100))
+        postval(date, 3, int(float(entrylist[4])*100))
