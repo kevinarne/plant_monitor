@@ -8,8 +8,8 @@ The script reads from the light sensor every 10 minutes and stores that value in
 # Potential Next Steps
 * Visualize the collected light sensor data
 * Create database backup
-* Switch to using environmental variables for credentials
-
+* Create browser interface for adding data
+* Create ESP32-powered sensors
 
 # Current Tables
 * plant_events - Tracks values recorded by various sensors, their associated plants, and things like watering, repotting, pruning, weighing, and even light. Currently it only tracks light.
@@ -18,6 +18,9 @@ The script reads from the light sensor every 10 minutes and stores that value in
 
 # Set Up
 Python 3 Libraries:
+* datetime
+* itertools
+* python-decouple
 * pyserial
 * pymysql
 See /setup/README.md for more details on setting up this project, including database setup.
