@@ -1,16 +1,14 @@
 import pymysql
+import decouple
 #File for managing some basic mysql tasks in plainer English
 class MySqlManager:
 	def __init__(self, cred_path, db_name):
 		self.db_name = db_name
-		# Check for credentials
-		try:
-			with open(cred_path, "r") as f:
-				self.username, self.pwd, self.host = f.read().strip().split("\n")
-		except:
-			print("Something went wrong loading the credentials, please check that the file exists and is formatted correctly")
-			exit()
 		# Check for database existence
+		self.host = decouple.config('HOST_NAME')
+		self.username = decouple.config('USER_NAME')
+		self.pwd = decouple.config('PASSWORD')
+
 		try:
 			with pymysql.connect(host=self.host, user = self.username, password = self.pwd, database = self.db_name) as db:
 				cur = db.cursor()
