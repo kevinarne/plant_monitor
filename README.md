@@ -7,6 +7,8 @@ The script reads from the light sensor every 10 minutes and stores that value in
 
 # Potential Next Steps
 * Visualize the collected light sensor data
+* Visualize weight data
+* Create plant status menu option
 * Create browser interface for adding data
 * Create ESP32-powered sensors
 
