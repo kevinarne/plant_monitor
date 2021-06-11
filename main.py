@@ -57,10 +57,20 @@ def getvals(table):
 	return mngr.export_table(table)
 
 def lastwatered(plantno):
+	mngr = sqlmanager.MySqlManager("lights")
 	# load plant events for plantno with code 2
-	# Iterate through events from start to today - 1
-		# if next day is > today, return today
-	pass
+	rawweights = mngr.export_table("plant_events", condition = "WHERE code = 2 AND plant=" + plantno)
+
+	tomorrow = None
+	# Iterate through events from today to earliest date
+	for row in rawweights[::-1]:
+		if tomorrow:
+			# if today > yesterday (aka the next term), return today
+			if tomorrow > row[3]:
+				print(row[2])
+				return datetime.datetime.fromisoformat(row[2])
+		tomorrow = row[3]
+	return None
 
 def printmenu():
 	print("Menu:")
@@ -69,6 +79,7 @@ def printmenu():
 	print(" - add event code")
 	print(" - add sensor")
 	print(" - get values")
+	print(" - last watered")
 	print(" - menu")
 	print(" - exit")
 
@@ -91,6 +102,9 @@ while True:
 		table = input("Which table would you like the values from? ")
 		for entry in getvals(table):
 			print(entry)
+	elif uinp == "last watered":
+		plantno = input("Which plant would you like to know about? ")
+		lastwatered(plantno)
 	else:
 		print("Sorry, that's not one of the menu options. To exit type exit")
 	uinp = input("What would you like to do? ").lower()
