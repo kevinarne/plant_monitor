@@ -56,6 +56,12 @@ def getvals(table):
 	mngr = sqlmanager.MySqlManager("lights")
 	return mngr.export_table(table)
 
+def lastwatered(plantno):
+	# load plant events for plantno with code 2
+	# Iterate through events from start to today - 1
+		# if next day is > today, return today
+	pass
+
 def printmenu():
 	print("Menu:")
 	print(" - add plant")

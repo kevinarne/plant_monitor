@@ -66,10 +66,15 @@ class MySqlManager:
 			print("Creating database")
 			cur.execute("CREATE DATABASE " + db_name)
 
-	def export_table(self, table):
+	def export_table(self, table, condition = None):
+		if not condition:
+			condition = ""
+		else:
+			condition = " " + condition 
+
 		with pymysql.connect(host = self.host, user = self.username, password = self.pwd, database = self.db_name) as db:
 			cur = db.cursor()
-			cur.execute("SELECT * FROM " + table)
+			cur.execute("SELECT * FROM " + table + condition)
 			return cur.fetchall()
 
 class MySqlCol:
@@ -90,12 +95,8 @@ class Table:
 	def get_cols(self):
 		pass
 
-def createtables():
-	mngr = MySqlManager("lights")
-	#Create database
-	#Create light_vals table
-	mngr.create_table("light_vals", MySqlCol.id_primary(), cols = [MySqlCol("val","INT"),
-		MySqlCol("datetime","VARCHAR(30)")])
+def createtables(dbname):
+	mngr = MySqlManager(dbname)
 	#Create plants table
 	mngr.create_table("plants", MySqlCol.id_primary(), cols=[MySqlCol("nickname", "VARCHAR(40)"),
 		MySqlCol("notes","VARCHAR(200)")])
@@ -118,4 +119,4 @@ def createtables():
 if __name__ == "__main__":
 	user_inp = input("Would you like to create the needed databases and tables (y/n)?")
 	if user_inp == "y":
-		createtables()
+		createtables("lights")
