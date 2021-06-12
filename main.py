@@ -74,9 +74,6 @@ def plantstatus(plant):
 				))
 		tomorrow = row[3]
 	print("Last watered on ",wdates[0].datetime, "at a weight of",wdates[0].val)
-	print("Max weight:", max)
-	print("Min weight:", min)
-	# Get last watered
 	# Get average watering
 
 class PlantEvent:
