@@ -65,15 +65,28 @@ def plantstatus(plant):
 			min = row[3]
 		if tomorrow:
 			if row[3] < tomorrow:
-				wdates.append(datetime.datetime.fromisoformat(row[2]))
+				wdates.append(PlantEvent(row[0],
+				row[1],
+				datetime.datetime.fromisoformat(row[2]),
+				row[3],
+				row[4],
+				row[5]
+				))
 		tomorrow = row[3]
-	print("Watering dates:", wdates)
+	print("Last watered on ",wdates[0].datetime, "at a weight of",wdates[0].val)
 	print("Max weight:", max)
 	print("Min weight:", min)
 	# Get last watered
 	# Get average watering
-	pass
 
+class PlantEvent:
+	def __init__(self,id,code,datetime,val,plant,notes):
+		self.id = id
+		self.code = code
+		self.datetime = datetime
+		self.val = val
+		self.plant = plant
+		self.notes = notes
 
 def getdateuser():
 	date = [int(x) for x in input("Please enter the year/month/day of the event: ").strip().split("/")]
