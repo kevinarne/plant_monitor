@@ -44,10 +44,35 @@ def addevent():
 			date = getdateuser()
 		else:
 			date = datetime.datetime.today()
-		val = int(input("What is the value, only use whole numbers? "))
 		plant = int(input("Which plant does this correspond to? "))
+		val = int(input("What is the value, only use whole numbers? "))
 		notes = input("Please type any notes here: ")
 		addentries.addevent("util/credentials", code, date.isoformat(), val, plant, notes)
+
+def plantstatus(plant):
+	mngr = sqlmanager.MySqlManager("lights")
+	vals = mngr.export_table("plant_events", condition = "WHERE code = 2 and plant = " + plant)
+	# Traverse weight events
+	max = 0
+	min = 1000000
+	wdates = []
+	tomorrow = None
+	print("Today's weight:",vals[len(vals)-1][3])
+	for row in vals[::-1]:
+		if row[3] > max:
+			max = row[3]
+		if row[3] < min:
+			min = row[3]
+		if tomorrow:
+			if row[3] < tomorrow:
+				wdates.append(datetime.datetime.fromisoformat(row[2]))
+		tomorrow = row[3]
+	print("Watering dates:", wdates)
+	print("Max weight:", max)
+	print("Min weight:", min)
+	# Get last watered
+	# Get average watering
+	pass
 
 
 def getdateuser():
@@ -84,6 +109,7 @@ def printmenu():
 	print(" - add sensor")
 	print(" - get values")
 	print(" - last watered")
+	print(" - plant status")
 	print(" - menu")
 	print(" - exit")
 
@@ -109,6 +135,9 @@ while True:
 	elif uinp == "last watered":
 		plantno = input("Which plant would you like to know about? ")
 		lastwatered(plantno)
+	elif uinp == "plant status":
+		plant = input("Which plant? ")
+		plantstatus(plant)
 	else:
 		print("Sorry, that's not one of the menu options. To exit type exit")
 	uinp = input("What would you like to do? ").lower()
