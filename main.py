@@ -39,7 +39,11 @@ def addevent():
 		print("Code not valid.")
 	else:
 		# Get details of event (datetime, val, plant, notes)
-		date = getdateuser()
+		usrinp = input("Type n if the event didn't happen today, or anything else for today: ")
+		if usrinp == "n":
+			date = getdateuser()
+		else:
+			date = datetime.datetime.today()
 		val = int(input("What is the value, only use whole numbers? "))
 		plant = int(input("Which plant does this correspond to? "))
 		notes = input("Please type any notes here: ")
