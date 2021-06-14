@@ -12,14 +12,14 @@ class MySqlManager:
 		try:
 			with pymysql.connect(host=self.host, user = self.username, password = self.pwd, database = self.db_name) as db:
 				cur = db.cursor()
-				print("Database connection made successfully.")
+				#print("Database connection made successfully.")
 		except:
 			print("Database", self.db_name, "not found. Creating now.")
 			self.create_db(self.db_name)
 			try:
 				with pymysql.connect(host=self.host, user = self.username, password = self.pwd, database = self.db_name) as db:
 					cur = db.cursor()
-					print("Database connection made successfully.")
+					#print("Database connection made successfully.")
 			except:
 				print("Database connection still failed, check your credentials and the permissions of your database.")
 				exit()
@@ -70,7 +70,7 @@ class MySqlManager:
 		if not condition:
 			condition = ""
 		else:
-			condition = " " + condition 
+			condition = " " + condition
 
 		with pymysql.connect(host = self.host, user = self.username, password = self.pwd, database = self.db_name) as db:
 			cur = db.cursor()

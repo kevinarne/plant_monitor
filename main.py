@@ -4,7 +4,19 @@
 import addentries
 import datetime
 from util import sqlmanager
+
+mngr = sqlmanager.MySqlManager("lights")
+
 uinp = input("What would you like to do? ").lower()
+
+class PlantEvent:
+	def __init__(self,id,code,datetime,val,plant,notes):
+		self.id = id
+		self.code = code
+		self.datetime = datetime
+		self.val = val
+		self.plant = plant
+		self.notes = notes
 
 def addplant():
 	name = input("What would you like to call this plant? ")
@@ -50,7 +62,6 @@ def addevent():
 		addentries.addevent("util/credentials", code, date.isoformat(), val, plant, notes)
 
 def plantstatus(plant):
-	mngr = sqlmanager.MySqlManager("lights")
 	vals = mngr.export_table("plant_events", condition = "WHERE code = 2 and plant = " + plant)
 	# Traverse weight events
 	max = 0
@@ -76,15 +87,6 @@ def plantstatus(plant):
 	print("Last watered on ",wdates[0].datetime, "at a weight of",wdates[0].val)
 	# Get average watering
 
-class PlantEvent:
-	def __init__(self,id,code,datetime,val,plant,notes):
-		self.id = id
-		self.code = code
-		self.datetime = datetime
-		self.val = val
-		self.plant = plant
-		self.notes = notes
-
 def getdateuser():
 	date = [int(x) for x in input("Please enter the year/month/day of the event: ").strip().split("/")]
 	if date[0]<2000:
@@ -92,24 +94,7 @@ def getdateuser():
 	return datetime.datetime(*date)
 
 def getvals(table):
-	mngr = sqlmanager.MySqlManager("lights")
 	return mngr.export_table(table)
-
-def lastwatered(plantno):
-	mngr = sqlmanager.MySqlManager("lights")
-	# load plant events for plantno with code 2
-	rawweights = mngr.export_table("plant_events", condition = "WHERE code = 2 AND plant=" + plantno)
-
-	tomorrow = None
-	# Iterate through events from today to earliest date
-	for row in rawweights[::-1]:
-		if tomorrow:
-			# if today > yesterday (aka the next term), return today
-			if tomorrow > row[3]:
-				print(row[2])
-				return datetime.datetime.fromisoformat(row[2])
-		tomorrow = row[3]
-	return None
 
 def printmenu():
 	print("Menu:")
@@ -118,7 +103,6 @@ def printmenu():
 	print(" - add event code")
 	print(" - add sensor")
 	print(" - get values")
-	print(" - last watered")
 	print(" - plant status")
 	print(" - menu")
 	print(" - exit")
@@ -142,9 +126,6 @@ while True:
 		table = input("Which table would you like the values from? ")
 		for entry in getvals(table):
 			print(entry)
-	elif uinp == "last watered":
-		plantno = input("Which plant would you like to know about? ")
-		lastwatered(plantno)
 	elif uinp == "plant status":
 		plant = input("Which plant? ")
 		plantstatus(plant)

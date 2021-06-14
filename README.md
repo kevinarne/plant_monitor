@@ -11,6 +11,7 @@ The script reads from the light sensor every 10 minutes and stores that value in
 * Create browser interface for adding data
 * Create ESP32-powered sensors
 * Convert database interface to HTTP/PHP
+* Create GUI for loading plant weights
 
 # Current Tables
 * plant_events - Tracks values recorded by various sensors, their associated plants, and things like watering, repotting, pruning, weighing, and even light. Currently it only tracks light.
