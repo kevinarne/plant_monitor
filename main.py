@@ -4,6 +4,8 @@
 import addentries
 import datetime
 from util import sqlmanager
+import matplotlib.pyplot as plt
+import numpy as np
 
 mngr = sqlmanager.MySqlManager("lights")
 
@@ -81,9 +83,21 @@ def plantstatus(plant):
 				datetime.datetime.fromisoformat(row[2]),
 				row[3],
 				row[4],
-				row[5]
-				))
+				row[5]))
 		tomorrow = row[3]
+	x = []
+	y = []
+	for row in vals:
+		# Add date to x
+		x.append(datetime.datetime.fromisoformat(row[2]).date().isoformat())
+		# Add val to y
+		y.append(int(row[3])/100)
+	fig, ax = plt.subplots()
+	ax.plot(x, y)
+	ax.set(xlabel = 'Date', ylabel = 'oz * 10', title = "Weight of " + plant)
+	plt.xticks(rotation=60)
+	plt.show()
+
 	print("Last watered on ",wdates[0].datetime, "at a weight of",wdates[0].val)
 	# Get average watering
 
