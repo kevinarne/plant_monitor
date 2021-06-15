@@ -7,7 +7,6 @@ The script reads from the light sensor every 10 minutes and stores that value in
 
 # Potential Next Steps
 * Visualize the collected light sensor data
-* Visualize weight data
 * Create browser interface for adding data
 * Create ESP32-powered sensors
 * Convert database interface to HTTP/PHP
@@ -27,4 +26,6 @@ Python 3 Libraries:
 * python-decouple
 * pyserial
 * pymysql
+* matplotlib
+* numpy
 See /setup/README.md for more details on setting up this project, including database setup.
