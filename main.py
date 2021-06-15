@@ -44,7 +44,7 @@ def addevent():
 	vals = getvals("event_codes")
 	# Ask user to pick event code
 	for entry in vals:
-		print(entry[0],"-",entry[1])
+		print("\t",entry[0],"-",entry[1])
 	ids = [x[0] for x in vals]
 	code = int(input("Which event code is this? "))
 	if code not in ids:
@@ -96,6 +96,9 @@ def getdateuser():
 def getvals(table):
 	return mngr.export_table(table)
 
+def getplants():
+	return [(row[0],row[1]) for row in getvals("plants")]
+
 def printmenu():
 	print("Menu:")
 	print(" - add plant")
@@ -127,6 +130,9 @@ while True:
 		for entry in getvals(table):
 			print(entry)
 	elif uinp == "plant status":
+		print("Available plants: ")
+		for tup in getplants():
+			print("\t", tup[0], "-", tup[1])
 		plant = input("Which plant? ")
 		plantstatus(plant)
 	else:
