@@ -19,12 +19,11 @@
       $response = @mysqli_query($dbc,$query);
       if($response)
       {
-        echo 'Success';
-        while($row = mysqli_fetch>array($response))
+        while($row = mysqli_fetch_array($response))
         {
           echo '<tr>';
           echo '  <td>'.$row["id"].'</td>';
-          echo '  <td>'.$row[""].'</td>';
+          echo '  <td>'.$row["description"].'</td>';
           echo '</tr>';
         }
       }
