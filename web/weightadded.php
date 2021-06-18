@@ -15,7 +15,6 @@
 				else
 				{
 					$f_date = $_POST['date'];
-					echo $f_date;
 				}
 
 				if(empty($_POST['val']))
@@ -25,26 +24,32 @@
 				else
 				{
 					$f_val = $_POST['val'];
-					echo $f_val;
 				}
 
 				if(empty($_POST['notes']))
 				{
 					$f_notes = "";
-					echo $f_val;
 				}
 				else
 				{
 					$f_notes = $_POST['notes'];
 				}
+			if(empty($data_missing))
+			{
+				require_once('../mysqli_connect.php');
+				//Convert the val to an integer
+				$m_val = (int)($f_val*100);
+				$query = "INSERT INTO plant_events (code, datetime, val, plant, notes) VALUES (?,?,?,?,?)";
+				$datetime = date_create_from_format("Y-m-d",$f_date);
+				$s_datetime = $datetime->format(DateTime::ISO8601);
+				$code = 2;
+				$stmt = mysqli_prepare($dbc,$query);
+				mysqli_stmt_bind_param($stmt, "isiis", $code, $s_datetime, $m_val, intval($f_plant), $f_notes);
+				mysqli_stmt_execute($stmt);
 			}
-			echo '<h1>success</h1>';
+		}
 		?>
 
 
 	</body>
-
-<?php
-	echo '<h1>Nothing here<h1>';
-?>
 </html>
