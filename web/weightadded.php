@@ -46,6 +46,9 @@
 				$stmt = mysqli_prepare($dbc,$query);
 				mysqli_stmt_bind_param($stmt, "isiis", $code, $s_datetime, $m_val, intval($f_plant), $f_notes);
 				mysqli_stmt_execute($stmt);
+				echo 'Data added successfully';
+				sleep(2);
+				header("Location: http://10.0.0.123/addweight.php");
 			}
 		}
 		?>
