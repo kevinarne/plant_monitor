@@ -80,7 +80,7 @@ def plantstatus(plant):
 			if row[3] < tomorrow:
 				wdates.append(PlantEvent(row[0],
 				row[1],
-				datetime.datetime.fromisoformat(row[2]),
+				datetime.datetime.fromisoformat(row[2][:19]),
 				row[3],
 				row[4],
 				row[5]))
@@ -89,7 +89,7 @@ def plantstatus(plant):
 	y = []
 	for row in vals:
 		# Add date to x
-		x.append(datetime.datetime.fromisoformat(row[2]).date().isoformat())
+		x.append(datetime.datetime.fromisoformat(row[2][:19]).date().isoformat())
 		# Add val to y
 		y.append(int(row[3])/100)
 	fig, ax = plt.subplots()
