@@ -5,3 +5,8 @@ util/__pycache__
 __pycache__
 logs
 .env
+util/event_codes.csv
+util/plant_events.csv
+util/plants.csv
+util/sensors.csv
+web/creds.php

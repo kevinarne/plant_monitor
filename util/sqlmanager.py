@@ -10,14 +10,14 @@ class MySqlManager:
 		self.pwd = decouple.config('PASSWORD')
 
 		try:
-			with pymysql.connect(host=self.host, user = self.username, password = self.pwd, database = self.db_name) as db:
+			with pymysql.connect(host=self.host, user=self.username, password=self.pwd, database=self.db_name) as db:
 				cur = db.cursor()
 				#print("Database connection made successfully.")
 		except:
 			print("Database", self.db_name, "not found. Creating now.")
 			self.create_db(self.db_name)
 			try:
-				with pymysql.connect(host=self.host, user = self.username, password = self.pwd, database = self.db_name) as db:
+				with pymysql.connect(host=self.host, user=self.username, password=self.pwd, database=self.db_name) as db:
 					cur = db.cursor()
 					#print("Database connection made successfully.")
 			except:
@@ -38,7 +38,7 @@ class MySqlManager:
 			print("Something went wrong adding the values to the table. Make sure you provided the correct table name and values for that table. You may not have the appropriate permissions either.")
 
 	def execute_mysql(self, query, vals):
-		with pymysql.connect(host = self.host, user = self.username, password = self.pwd, database = self.db_name) as db:
+		with pymysql.connect(host=self.host, user=self.username, password=self.pwd, database=self.db_name) as db:
 			cur = db.cursor()
 			if len(vals) == 0:
 				cur.execute(query)
@@ -46,7 +46,7 @@ class MySqlManager:
 				cur.execute(query, vals)
 			db.commit()
 
-	def create_table(self, tablename, primary, cols = None):
+	def create_table(self, tablename, primary, cols=None):
 		query = "CREATE TABLE " + tablename + " (" + primary.to_str()
 		if cols == None:
 			pass
@@ -56,23 +56,23 @@ class MySqlManager:
 		query += ", PRIMARY KEY(" + primary.name + "))"
 		#print(query)
 		try:
-			self.execute_mysql(query,())
+			self.execute_mysql(query, ())
 		except:
 			print(tablename, "already exists.")
 
 	def create_db(self, db_name):
-		with pymysql.connect(host = self.host, user = self.username, password = self.pwd) as db:
+		with pymysql.connect(host=self.host, user=self.username, password=self.pwd) as db:
 			cur = db.cursor()
 			print("Creating database")
 			cur.execute("CREATE DATABASE " + db_name)
 
-	def export_table(self, table, condition = None):
+	def export_table(self, table, condition=None):
 		if not condition:
 			condition = ""
 		else:
 			condition = " " + condition
 
-		with pymysql.connect(host = self.host, user = self.username, password = self.pwd, database = self.db_name) as db:
+		with pymysql.connect(host=self.host, user=self.username, password=self.pwd, database=self.db_name) as db:
 			cur = db.cursor()
 			cur.execute("SELECT * FROM " + table + condition)
 			return cur.fetchall()

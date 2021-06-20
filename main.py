@@ -12,7 +12,7 @@ mngr = sqlmanager.MySqlManager("lights")
 uinp = input("What would you like to do? ").lower()
 
 class PlantEvent:
-	def __init__(self,id,code,datetime,val,plant,notes):
+	def __init__(self, id, code, datetime, val, plant, notes):
 		self.id = id
 		self.code = code
 		self.datetime = datetime
@@ -38,7 +38,7 @@ def addeventcode():
 	description = input("Please enter a description (140 char max): ")
 	if len(description) > 140:
 		print("Description too long, truncating to 140")
-		description = description[:139]
+		description = description[: 139]
 	addentries.addeventcode("util/credentials", description)
 
 def addevent():
@@ -46,7 +46,7 @@ def addevent():
 	vals = getvals("event_codes")
 	# Ask user to pick event code
 	for entry in vals:
-		print("\t",entry[0],"-",entry[1])
+		print("\t", entry[0], "-", entry[1])
 	ids = [x[0] for x in vals]
 	code = int(input("Which event code is this? "))
 	if code not in ids:
@@ -70,20 +70,21 @@ def plantstatus(plant):
 	min = 1000000
 	wdates = []
 	tomorrow = None
-	print("Today's weight:",vals[len(vals)-1][3])
-	for row in vals[::-1]:
+	print("Today's weight:", vals[len(vals)-1][3])
+	for row in vals[: : -1]:
 		if row[3] > max:
 			max = row[3]
 		if row[3] < min:
 			min = row[3]
 		if tomorrow:
 			if row[3] < tomorrow:
-				wdates.append(PlantEvent(row[0],
-				row[1],
-				datetime.datetime.fromisoformat(row[2][:19]),
-				row[3],
-				row[4],
-				row[5]))
+				wdates.append(PlantEvent(
+					row[0],
+					row[1],
+					datetime.datetime.fromisoformat(row[2][:19]),
+					row[3],
+					row[4],
+					row[5]))
 		tomorrow = row[3]
 	x = []
 	y = []
@@ -91,10 +92,10 @@ def plantstatus(plant):
 		# Add date to x
 		x.append(datetime.datetime.fromisoformat(row[2][:19]).date().isoformat())
 		# Add val to y
-		y.append(int(row[3])/100)
+		y.append(int(row[3]) / 100)
 	fig, ax = plt.subplots()
 	ax.plot(x, y)
-	ax.set(xlabel = 'Date', ylabel = 'oz * 10', title = "Weight of " + plant)
+	ax.set(xlabel='Date', ylabel='oz * 10', title="Weight of " + plant)
 	plt.xticks(rotation=60)
 	plt.show()
 
@@ -103,7 +104,7 @@ def plantstatus(plant):
 
 def getdateuser():
 	date = [int(x) for x in input("Please enter the year/month/day of the event: ").strip().split("/")]
-	if date[0]<2000:
+	if date[0] < 2000:
 		date[0] += 2000
 	return datetime.datetime(*date)
 
@@ -111,7 +112,7 @@ def getvals(table):
 	return mngr.export_table(table)
 
 def getplants():
-	return [(row[0],row[1]) for row in getvals("plants")]
+	return [(row[0], row[1]) for row in getvals("plants")]
 
 def printmenu():
 	print("Menu:")
