@@ -1,6 +1,6 @@
 <html>
 <head>
-    	<title>Add Weight</title>
+  <title>Add Weight</title>
 	<style>
 		p, select, input{font-size:30px;}
 		div{
@@ -17,7 +17,7 @@
 
 <body>
 	<div >
-    	<form action="http://10.0.0.123/weightadded.php" method="post">
+    <form action="http://10.0.0.123/weightadded.php" method="post">
 		<select name="plant" id="plant">
       		<?php
         	require_once('../mysqli_connect.php');
@@ -31,7 +31,7 @@
           		{
               			echo '<option value='.$row["id"].'>'.$row["nickname"].'</option>';
           		}
-		}
+          }
       		?>
       		</select>
       		<p>Date:  <input type="date" name="date"/></p>
