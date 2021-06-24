@@ -1,4 +1,5 @@
 <?php
+  echo "Loading...";
   // Get the data from post (* required)
     // * light val
     // * sensor number
@@ -13,6 +14,7 @@
   else
   {
     $f_val = $_POST['val'];
+    echo $f_val;
   }
 
   if(empty($_POST['sid']))
@@ -22,6 +24,7 @@
   else
   {
     $f_sid = $_POST['sid'];
+    echo $f_sid;
   }
 
   if(empty($_POST['dt']))
@@ -31,6 +34,7 @@
   else
   {
     $f_dt = $_POST['dt'];
+    echo $f_dt;
   }
 
   if(empty($_POST['eid']))
@@ -40,6 +44,7 @@
   else
   {
     $f_eid = $_POST['eid'];
+    echo $f_eid;
   }
   // Get plants subscribed to that sensor
     // Add sensor values for each plant
