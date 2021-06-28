@@ -24,7 +24,7 @@ void loop()
   if(WiFi.status() == WL_CONNECTED)
   {
     HTTPClient http;
-    uint16_t val = analogRead(CDS_PIN);
+  
     
     String query = serverName + "?val=198&sid=2&eid=1";
     
