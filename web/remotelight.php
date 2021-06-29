@@ -10,7 +10,7 @@
   if(empty($_POST['val']))
   {
       // Exit error
-      exit();
+      $f_val = 0;
   }
   else
   {
@@ -21,7 +21,7 @@
   if(empty($_POST['sid']))
   {
     // Exit error
-    exit();
+    $f_sid = 0;
   }
   else
   {
@@ -42,7 +42,7 @@
   if(empty($_POST['eid']))
   {
     //exit
-    exit();
+    $f_eid = 0;
   }
   else
   {
@@ -59,18 +59,18 @@
 
   foreach($subarr as $plant)
   {
-    //$query = "INSERT INTO plant_events (code, datetime, val, plant, notes) VALUES (?,?,?,?,?)";
-    //$stmt = mysqli_prepare($dbc, $query)
-    //$notes = "test";
+    $query = "INSERT INTO plant_events (code, datetime, val, plant, notes) VALUES (?, ?, ?, ?, ?)";
+    $stmt = mysqli_prepare($dbc, $query);
+    $notes = "test";
 
-    //mysqli_stmt_bind_param(
-     // $stmt,
-      //"isiis",
-      //intval($f_eid),
-      //$f_dt,
-      //intval($f_val),
-      //intval($plant),
-      //$notes
-      //);
-    //mysqli_stmt_execute($stmt);
+    mysqli_stmt_bind_param(
+      $stmt,
+      "isiis",
+      intval($f_eid),
+      $f_dt,
+      intval($f_val),
+      intval($plant),
+      $notes
+      );
+    mysqli_stmt_execute($stmt);
   }
