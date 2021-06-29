@@ -10,6 +10,7 @@ void setup()
 {
   Serial.begin(115200);
   pinMode(CDS_PIN, INPUT);
+  
   WiFi.begin(NETWORK, PASS);
   while(WiFi.status() != WL_CONNECTED)
   {
@@ -25,13 +26,19 @@ void loop()
   {
     HTTPClient http;
     uint16_t val = analogRead(CDS_PIN);
-    
-    String query = serverName + "?val=198&sid=2&eid=1";
+    Serial.print("Value: ");
+    Serial.println(val);
+    String query = serverName + "?val="+val+"&sid=1&eid=0";
     
     http.begin(query.c_str());
     int httpResponse = http.GET();
     Serial.println(httpResponse);
     http.end();
-    delay(2000);
+    delay(60000);
   }
+}
+
+int readSensor()
+{
+  return analogRead(CDS_PIN);
 }
