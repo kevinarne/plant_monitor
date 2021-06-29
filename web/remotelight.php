@@ -7,46 +7,46 @@
     // * event code
   // Check that all data was provided
   // Return negative response if something was left out
-  if(empty($_POST['val']))
+  if(empty($_GET['val']))
   {
       // Exit error
       $f_val = 0;
   }
   else
   {
-    $f_val = $_POST['val'];
+    $f_val = $_GET['val'];
     echo $f_val;
   }
 
-  if(empty($_POST['sid']))
+  if(empty($_GET['sid']))
   {
     exit();
     $f_sid = 0;
   }
   else
   {
-    $f_sid = $_POST['sid'];
+    $f_sid = $_GET['sid'];
     echo $f_sid;
   }
 
-  if(empty($_POST['dt']))
+  if(empty($_GET['dt']))
   {
     $f_dt = date('Y-m-dTH:i:s');
   }
   else
   {
-    $f_dt = $_POST['dt'];
+    $f_dt = $_GET['dt'];
     echo $f_dt;
   }
 
-  if(empty($_POST['eid']))
+  if(empty($_GET['eid']))
   {
     //exit
     $f_eid = 0;
   }
   else
   {
-    $f_eid = $_POST['eid'];
+    $f_eid = $_GET['eid'];
     echo $f_eid;
   }
 
