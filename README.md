@@ -7,10 +7,11 @@ The script reads from the light sensor every 10 minutes and stores that value in
 
 # Potential Next Steps
 * Visualize the collected light sensor data
-* Create browser interface for adding data
 * Create ESP32-powered sensors
+* Migrate from serial light sensor to ESP32 light sensor
+* Create generic plant_event php interface
 * Convert database interface to HTTP/PHP
-* Create GUI for loading plant weights
+* Write a script to detect when an ESP32 sensor is down (server side)
 
 # Current Tables
 * plant_events - Tracks values recorded by various sensors, their associated plants, and things like watering, repotting, pruning, weighing, and even light. Currently it only tracks light.
@@ -28,4 +29,5 @@ Python 3 Libraries:
 * pymysql
 * matplotlib
 * numpy
+
 See /setup/README.md for more details on setting up this project, including database setup.
