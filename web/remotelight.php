@@ -20,7 +20,7 @@
 
   if(empty($_POST['sid']))
   {
-    // Exit error
+    exit();
     $f_sid = 0;
   }
   else
@@ -31,7 +31,7 @@
 
   if(empty($_POST['dt']))
   {
-    $f_dt = date('Y-m-dTH:m:s');
+    $f_dt = date('Y-m-dTH:i:s');
   }
   else
   {
@@ -61,7 +61,7 @@
   {
     $query = "INSERT INTO plant_events (code, datetime, val, plant, notes) VALUES (?, ?, ?, ?, ?)";
     $stmt = mysqli_prepare($dbc, $query);
-    $notes = "test";
+    $notes = "";
 
     mysqli_stmt_bind_param(
       $stmt,
