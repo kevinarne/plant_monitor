@@ -2,14 +2,14 @@
 #include <WiFi.h>
 #include <HTTPClient.h>
 
-#define CDS_PIN 2
+#define CDS_PIN 34
 
 String serverName = "http://10.0.0.123/remotelight.php";
 
 void setup() 
 {
   Serial.begin(115200);
-  pinMode(CDS_PIN, INPUT);
+  //pinMode(CDS_PIN, INPUT);
   
   WiFi.begin(NETWORK, PASS);
   while(WiFi.status() != WL_CONNECTED)
@@ -32,13 +32,13 @@ void loop()
     
     http.begin(query.c_str());
     int httpResponse = http.GET();
-    Serial.println(httpResponse);
+    //Serial.println(httpResponse);
     http.end();
     delay(60000);
   }
 }
 
-int readSensor()
+uint16_t readSensor()
 {
   return analogRead(CDS_PIN);
 }
