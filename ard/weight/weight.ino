@@ -12,8 +12,8 @@ HX711 scale;
 float calibration_factor = -7050;
 
 // Use 0 for testing to make it easy to remove from the database
-int sensor_id = 0;
-int event_id = 0;
+int sensor_id = 3;
+int event_id = 8;
 
 String serverName = "http://10.0.0.123/remotelight.php";
 
@@ -73,6 +73,7 @@ uint16_t readSensor()
   float rawRead = scale.get_units();
   float slope = (0.605605 + 0.60194) / 2.0;
   float adjRead = rawRead * slope;
+  Serial.println(adjRead);
   
   return (uint16_t)(adjRead * 100);
 }
