@@ -4,8 +4,8 @@
 #include <HTTPClient.h>
 
 #define POLLING_INTERVAL 600000 // In milliseconds
-#define DOUT 4
-#define CLK 2
+#define DOUT 18
+#define CLK 19
 
 HX711 scale;
 
@@ -15,7 +15,7 @@ float calibration_factor = -7050;
 int sensor_id = 0;
 int event_id = 0;
 
-String serverName = "http://10.0.0.123/addweight.php";
+String serverName = "http://10.0.0.123/remotelight.php";
 
 void setup() 
 {
