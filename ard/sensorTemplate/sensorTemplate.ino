@@ -4,13 +4,11 @@
 
 #define POLLING_INTERVAL 600000 // In milliseconds
 
-#define CDS_PIN 34
-
 // Use 0 for testing to make it easy to remove from the database
-int sensor_id = 1;
-int event_id = 5;
+int sensor_id = 0;
+int event_id = 0;
 
-String serverName = "http://10.0.0.123/remotelight.php";
+String serverName = "localhost";
 
 void setup() 
 {
@@ -23,6 +21,7 @@ void setup()
     delay(500);
   }
   Serial.println("Connected!");
+  setupSensor();
 }
 
 void loop() 
@@ -47,7 +46,14 @@ void loop()
   }
 }
 
+// Here is where you should place all of your sensor setup code
+void setupSensor()
+{
+
+}
+
+// Place your sensor reading code here
 uint16_t readSensor()
 {
-  return analogRead(CDS_PIN);
+  return 1;
 }
