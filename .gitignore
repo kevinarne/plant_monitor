@@ -11,3 +11,4 @@ util/plants.csv
 util/sensors.csv
 web/creds.php
 ard/wllight/creds.h
+ard/sensorTemplate/creds.h
