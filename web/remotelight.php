@@ -56,21 +56,22 @@
   $sensorresponse = @mysqli_query($dbc, $sensorquery);
   $subscribed = mysqli_fetch_array($sensorresponse);
   $subarr = explode(",", $subscribed[0]);
-
+  $f_src = "s".strval($f_sid);
   foreach($subarr as $plant)
   {
-    $query = "INSERT INTO plant_events (code, datetime, val, plant, notes) VALUES (?, ?, ?, ?, ?)";
+    $query = "INSERT INTO plant_events (code, datetime, val, plant, notes, source) VALUES (?, ?, ?, ?, ?, ?)";
     $stmt = mysqli_prepare($dbc, $query);
     $notes = "";
 
     mysqli_stmt_bind_param(
       $stmt,
-      "isiis",
+      "isiiss",
       intval($f_eid),
       $f_dt,
       intval($f_val),
       intval($plant),
-      $notes
+      $notes,
+      $f_src
       );
     mysqli_stmt_execute($stmt);
   }
