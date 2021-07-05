@@ -45,6 +45,7 @@ class MySqlManager:
 			else:
 				cur.execute(query, vals)
 			db.commit()
+			return cur.fetchall()
 
 	def create_table(self, tablename, primary, cols=None):
 		query = "CREATE TABLE " + tablename + " (" + primary.to_str()
