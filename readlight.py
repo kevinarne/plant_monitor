@@ -35,5 +35,5 @@ if __name__ == "__main__":
 	plants = [2,3,4,5]
 	for plant in plants:
 		mngr.add_values("plant_events",
-		["code","datetime","val","plant","notes"],
-		[1,datetime.now().isoformat(),entry, plant, "From sensor " + str(sensorid)])
+		["code","datetime","val","plant","notes","source"],
+		[1,datetime.now().isoformat(),entry, plant, "From sensor " + str(sensorid)],"s2")
