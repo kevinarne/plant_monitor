@@ -1,0 +1,147 @@
+EESchema Schematic File Version 4
+EELAYER 30 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 1 1
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L Device:R_PHOTO R?
+U 1 1 60E4F4D5
+P 4300 3550
+F 0 "R?" H 4370 3596 50  0000 L CNN
+F 1 "R_PHOTO" H 4370 3505 50  0000 L CNN
+F 2 "" V 4350 3300 50  0001 L CNN
+F 3 "~" H 4300 3500 50  0001 C CNN
+	1    4300 3550
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 60E4FE8A
+P 4300 4200
+F 0 "#PWR?" H 4300 3950 50  0001 C CNN
+F 1 "GND" H 4305 4027 50  0000 C CNN
+F 2 "" H 4300 4200 50  0001 C CNN
+F 3 "" H 4300 4200 50  0001 C CNN
+	1    4300 4200
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:VCC #PWR?
+U 1 1 60E5063A
+P 1950 3050
+F 0 "#PWR?" H 1950 2900 50  0001 C CNN
+F 1 "VCC" H 1965 3223 50  0000 C CNN
+F 2 "" H 1950 3050 50  0001 C CNN
+F 3 "" H 1950 3050 50  0001 C CNN
+	1    1950 3050
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+3.3V #PWR?
+U 1 1 60E513CB
+P 4300 3250
+F 0 "#PWR?" H 4300 3100 50  0001 C CNN
+F 1 "+3.3V" H 4315 3423 50  0000 C CNN
+F 2 "" H 4300 3250 50  0001 C CNN
+F 3 "" H 4300 3250 50  0001 C CNN
+	1    4300 3250
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R_Small_US R?
+U 1 1 60E51DCF
+P 4300 3950
+F 0 "R?" H 4368 3996 50  0000 L CNN
+F 1 "R_Small_US" H 4368 3905 50  0000 L CNN
+F 2 "" H 4300 3950 50  0001 C CNN
+F 3 "~" H 4300 3950 50  0001 C CNN
+	1    4300 3950
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4300 3250 4300 3400
+Wire Wire Line
+	4300 3700 4300 3750
+Wire Wire Line
+	4300 4050 4300 4200
+Wire Wire Line
+	4300 3750 4900 3750
+Connection ~ 4300 3750
+Wire Wire Line
+	4300 3750 4300 3850
+$Comp
+L Device:LED D?
+U 1 1 60E52FF2
+P 7400 3500
+F 0 "D?" V 7439 3382 50  0000 R CNN
+F 1 "LED" V 7348 3382 50  0000 R CNN
+F 2 "" H 7400 3500 50  0001 C CNN
+F 3 "~" H 7400 3500 50  0001 C CNN
+	1    7400 3500
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:R_Small_US R?
+U 1 1 60E542CE
+P 7400 3950
+F 0 "R?" H 7468 3996 50  0000 L CNN
+F 1 "R_Small_US" H 7468 3905 50  0000 L CNN
+F 2 "" H 7400 3950 50  0001 C CNN
+F 3 "~" H 7400 3950 50  0001 C CNN
+	1    7400 3950
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 60E54A10
+P 7400 4200
+F 0 "#PWR?" H 7400 3950 50  0001 C CNN
+F 1 "GND" H 7405 4027 50  0000 C CNN
+F 2 "" H 7400 4200 50  0001 C CNN
+F 3 "" H 7400 4200 50  0001 C CNN
+	1    7400 4200
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7400 4050 7400 4200
+Wire Wire Line
+	7400 3650 7400 3850
+Wire Wire Line
+	7400 3350 7400 3150
+$Comp
+L Device:Battery_Cell BT?
+U 1 1 60E5549B
+P 1950 3350
+F 0 "BT?" H 2068 3446 50  0000 L CNN
+F 1 "Battery_Cell" H 2068 3355 50  0000 L CNN
+F 2 "" V 1950 3410 50  0001 C CNN
+F 3 "~" V 1950 3410 50  0001 C CNN
+	1    1950 3350
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 60E5641E
+P 1950 3550
+F 0 "#PWR?" H 1950 3300 50  0001 C CNN
+F 1 "GND" H 1955 3377 50  0000 C CNN
+F 2 "" H 1950 3550 50  0001 C CNN
+F 3 "" H 1950 3550 50  0001 C CNN
+	1    1950 3550
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1950 3050 1950 3150
+Wire Wire Line
+	1950 3450 1950 3550
+$EndSCHEMATC
