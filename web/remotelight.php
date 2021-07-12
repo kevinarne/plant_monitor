@@ -31,7 +31,7 @@
 
   if(empty($_GET['dt']))
   {
-    $f_dt = date('Y-m-dTH:i:s');
+    $f_dt = date('Y-m-d H:i:s');
   }
   else
   {
