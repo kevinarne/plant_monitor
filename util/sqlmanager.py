@@ -2,6 +2,11 @@ import pymysql
 import decouple
 #File for managing some basic mysql tasks in plainer English
 class MySqlManager:
+	"""
+	Manages connections and queries with MySQL database.
+
+	This is meant to be a step up  from pymysql's interface with the database into more human-readable language. It also handles pulling the database credentials from the environmental variables.
+	"""
 	def __init__(self, db_name):
 		self.db_name = db_name
 		# Check for database existence
@@ -25,6 +30,13 @@ class MySqlManager:
 				exit()
 
 	def add_values(self, tablename, cols, values):
+		"""
+		Adds values to a table in the database.
+
+		tablename - string name of the target table
+		cols - list of strings containing the targeted column names
+		values - list of corresponding column values, must match order of cols
+		"""
 		try:
 			query = "INSERT INTO " + tablename + " ("
 			for n, col in enumerate(cols):
@@ -38,6 +50,13 @@ class MySqlManager:
 			print("Something went wrong adding the values to the table. Make sure you provided the correct table name and values for that table. You may not have the appropriate permissions either.")
 
 	def execute_mysql(self, query, vals):
+		"""
+		Executes a MySQL query with vals.
+
+		Many of the other functions are wrappers for this one.
+		query = string MySQL query
+		vals = values to be added to the MySQL query
+		"""
 		with pymysql.connect(host=self.host, user=self.username, password=self.pwd, database=self.db_name) as db:
 			cur = db.cursor()
 			if len(vals) == 0:
@@ -48,6 +67,13 @@ class MySqlManager:
 			return cur.fetchall()
 
 	def create_table(self, tablename, primary, cols=None):
+		"""
+		Creates a table in the database
+
+		tablename - string name of the table
+		primary - MySqlCol primary key
+		cols - list of additional columns in MySqlCol form
+		"""
 		query = "CREATE TABLE " + tablename + " (" + primary.to_str()
 		if cols == None:
 			pass
@@ -60,14 +86,26 @@ class MySqlManager:
 			self.execute_mysql(query, ())
 		except:
 			print(tablename, "already exists.")
-
 	def create_db(self, db_name):
+		"""
+		Creates a database
+
+		db_name - string name of the database
+		"""
 		with pymysql.connect(host=self.host, user=self.username, password=self.pwd) as db:
 			cur = db.cursor()
 			print("Creating database")
 			cur.execute("CREATE DATABASE " + db_name)
 
 	def export_table(self, table, condition=None):
+		"""
+		Exports all of the values from a given table.
+
+		conditiions can be added to reduce the load on the database
+
+		table - string name of the table
+		condition - string containing the conditions appended to the query
+		"""
 		if not condition:
 			condition = ""
 		else:
@@ -79,6 +117,9 @@ class MySqlManager:
 			return cur.fetchall()
 
 class MySqlCol:
+	"""
+	Class describing a MySQL column.
+	"""
 	def __init__(self, name, attrs):
 		self.name = name
 		self.attrs = attrs
