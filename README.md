@@ -21,9 +21,11 @@ The wireless sensors add data to the database via an HTTP request handled by a P
 * Create more ESP32-powered sensors
 * Migrate from serial light sensor to ESP32 light sensor
 * Create generic plant_event php interface
-* Write a script to detect when an ESP32 sensor is down (server side)
 * Add php login system
 * Add a user id column to the plant_events, sensors, and plants tables
+* Convert to Flask
+* Add web page to store wireless connections to ESP32 sketches
+* Store tare value in EEPROM on ESP32
 
 # Current Tables
 * plant_events - Tracks values recorded by various sensors, their associated plants, and things like watering, repotting, pruning, weighing, and even light. Currently it only tracks light.
@@ -41,5 +43,6 @@ Python 3 Libraries:
 * pymysql
 * matplotlib
 * numpy
+* smtplib
 
 See /setup/README.md for more details on setting up this project, including database setup.
