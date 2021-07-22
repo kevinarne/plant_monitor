@@ -1,8 +1,6 @@
-//#include "creds.h"
 #include "HX711.h"
 #include <WiFi.h>
 #include <HTTPClient.h>
-//#include <ESPAsyncWebServer.h>
 #include <Preferences.h>
 
 #define POLLING_INTERVAL 600000 // In milliseconds
@@ -27,12 +25,13 @@ void setup()
   Serial.begin(115200);
   prefs.begin("weight", false);
   // Check EEPROM for network ID and password
-  if (prefs.getString("SSID").length()>0 && prefs.getString("PASS").length()>0)
+  eename = prefs.getString("SSID").c_str();
+  eepass = prefs.getString("PASS").c_str();
+  
+  if (prefs.getString("SSID").length()>2 && prefs.getString("PASS").length()>2)
   {
-    eename = prefs.getString("SSID").c_str();
     Serial.println("Network name found"); 
     Serial.println(eename); 
-    eepass = prefs.getString("PASS").c_str();
     Serial.println("Network password found");
     Serial.println(eepass);
   }
