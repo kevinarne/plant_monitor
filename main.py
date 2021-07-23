@@ -4,6 +4,7 @@
 import addentries
 import datetime
 from util import sqlmanager
+from util import addplant
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -19,11 +20,6 @@ class PlantEvent:
 		self.val = val
 		self.plant = plant
 		self.notes = notes
-
-def addplant():
-	name = input("What would you like to call this plant? ")
-	notes = input("Please type any notes about your plant here: ")
-	addentries.addplant("util/credentials", name, notes)
 
 def addsensor():
 	description = input("Please describe this sensor: ")
@@ -133,7 +129,7 @@ while True:
 		printmenu()
 	elif uinp == "add plant":
 		print("Adding plants")
-		addplant()
+		addplant.add_plant()
 	elif uinp == "add event":
 		addevent()
 	elif uinp == "add event code":
