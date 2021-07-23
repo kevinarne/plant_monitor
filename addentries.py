@@ -1,12 +1,6 @@
 from util import sqlmanager
 #Add plants to database
 
-def addsensor(credpath, description, active, type, schedule, units, subscribed):
-	mngr = sqlmanager.MySqlManager("lights")
-	mngr.add_values("sensors",
-		["description","active","type","schedule","units","subscribed"],
-		[description, active, type, schedule, units, subscribed])
-
 def addeventcode(credpath, description):
 	mngr = sqlmanager.MySqlManager("lights")
 	mngr.add_values("event_codes", ["description"], [description])

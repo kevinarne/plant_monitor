@@ -4,11 +4,12 @@
 import addentries
 import datetime
 from util import sqlmanager
-from util import addplant
+from util import addplant, addsensor
 import matplotlib.pyplot as plt
 import numpy as np
+from decouple import config
 
-mngr = sqlmanager.MySqlManager("lights")
+mngr = sqlmanager.MySqlManager(config('DB_NAME'))
 
 uinp = input("What would you like to do? ").lower()
 
@@ -20,15 +21,6 @@ class PlantEvent:
 		self.val = val
 		self.plant = plant
 		self.notes = notes
-
-def addsensor():
-	description = input("Please describe this sensor: ")
-	active = "y"
-	type = input("What type of sensor is this (use correct id number)? ")
-	units = input("What are the units of measurement? ")
-	subscribed = input("Which plants are subscribed to this sensor (separate id #s by commas)? ")
-	schedule = input("What schedule should this be polled at (use crontab notation)? ")
-	addentries.addsensor("util/credentials", description, active, type, schedule, units, subscribed)
 
 def addeventcode():
 	description = input("Please enter a description (140 char max): ")
@@ -136,7 +128,7 @@ while True:
 		addeventcode()
 	elif uinp == "add sensor":
 		print("Adding sensor")
-		addsensor()
+		addsensor.add_sensor()
 	elif uinp == "get values":
 		table = input("Which table would you like the values from? ")
 		for entry in getvals(table):
