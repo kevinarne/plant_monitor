@@ -4,7 +4,7 @@
 import addentries
 import datetime
 from util import sqlmanager
-from util import addplant, addsensor, addeventcode
+from util import addplant, addsensor, addeventcode, addevent
 import matplotlib.pyplot as plt
 import numpy as np
 from decouple import config
@@ -21,28 +21,6 @@ class PlantEvent:
 		self.val = val
 		self.plant = plant
 		self.notes = notes
-
-def addevent():
-	# Get event codes
-	vals = getvals("event_codes")
-	# Ask user to pick event code
-	for entry in vals:
-		print("\t", entry[0], "-", entry[1])
-	ids = [x[0] for x in vals]
-	code = int(input("Which event code is this? "))
-	if code not in ids:
-		print("Code not valid.")
-	else:
-		# Get details of event (datetime, val, plant, notes)
-		usrinp = input("Type n if the event didn't happen today, or anything else for today: ")
-		if usrinp == "n":
-			date = getdateuser()
-		else:
-			date = datetime.datetime.today()
-		plant = int(input("Which plant does this correspond to? "))
-		val = int(input("What is the value, only use whole numbers? "))
-		notes = input("Please type any notes here: ")
-		addentries.addevent("util/credentials", code, date.isoformat(), val, plant, notes)
 
 def plantstatus(plant):
 	vals = mngr.export_table("plant_events", condition = "WHERE code = 2 and plant = " + plant)
@@ -82,16 +60,6 @@ def plantstatus(plant):
 	plt.show()
 
 	print("Last watered on ",wdates[0].datetime, "at a weight of",wdates[0].val)
-	# Get average watering
-
-def getdateuser():
-	date = [int(x) for x in input("Please enter the year/month/day of the event: ").strip().split("/")]
-	if date[0] < 2000:
-		date[0] += 2000
-	return datetime.datetime(*date)
-
-def getvals(table):
-	return mngr.export_table(table)
 
 def getplants():
 	return [(row[0], row[1]) for row in getvals("plants")]
@@ -115,7 +83,7 @@ while True:
 	elif uinp == "add plant":
 		addplant.add_plant()
 	elif uinp == "add event":
-		addevent()
+		addevent.add_event()
 	elif uinp == "add event code":
 		addeventcode.add_event_code()
 	elif uinp == "add sensor":
