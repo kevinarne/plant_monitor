@@ -4,7 +4,7 @@
 import addentries
 import datetime
 from util import sqlmanager
-from util import addplant, addsensor
+from util import addplant, addsensor, addeventcode
 import matplotlib.pyplot as plt
 import numpy as np
 from decouple import config
@@ -21,13 +21,6 @@ class PlantEvent:
 		self.val = val
 		self.plant = plant
 		self.notes = notes
-
-def addeventcode():
-	description = input("Please enter a description (140 char max): ")
-	if len(description) > 140:
-		print("Description too long, truncating to 140")
-		description = description[: 139]
-	addentries.addeventcode("util/credentials", description)
 
 def addevent():
 	# Get event codes
@@ -120,12 +113,11 @@ while True:
 	elif uinp == "menu":
 		printmenu()
 	elif uinp == "add plant":
-		print("Adding plants")
 		addplant.add_plant()
 	elif uinp == "add event":
 		addevent()
 	elif uinp == "add event code":
-		addeventcode()
+		addeventcode.add_event_code()
 	elif uinp == "add sensor":
 		print("Adding sensor")
 		addsensor.add_sensor()

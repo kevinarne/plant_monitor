@@ -1,10 +1,6 @@
 from util import sqlmanager
 #Add plants to database
 
-def addeventcode(credpath, description):
-	mngr = sqlmanager.MySqlManager("lights")
-	mngr.add_values("event_codes", ["description"], [description])
-
 def addevent(credpath, code, date, val, plant, notes):
 	mngr = sqlmanager.MySqlManager("lights")
 	mngr.add_values("plant_events",
