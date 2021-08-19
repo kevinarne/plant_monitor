@@ -1,7 +1,6 @@
 # Main script to manage all user-facing activities like adding new plants,
 # creating new event codes, adding manual events (like actual weights),
 # pulling up visualizations of the data, etc
-import addentries
 import datetime
 from util import sqlmanager
 from util import addplant, addsensor, addeventcode, addevent
@@ -70,6 +69,7 @@ def printmenu():
 	print(" - add event")
 	print(" - add event code")
 	print(" - add sensor")
+	print(" - toggle sensor status")
 	print(" - get values")
 	print(" - plant status")
 	print(" - menu")
@@ -87,8 +87,26 @@ while True:
 	elif uinp == "add event code":
 		addeventcode.add_event_code()
 	elif uinp == "add sensor":
-		print("Adding sensor")
 		addsensor.add_sensor()
+	elif uinp == "toggle sensor status":
+		# Get list of sensors
+		sensors = mngr.export_table("sensors")
+		for sensor in sensors:
+			print(f"{sensor[0]} - {sensor[1]}\tActive: {sensor[2]}")
+		sensor_num = int(input("Which sensor would you like to toggle? "))
+		temp_sensor = None
+		for sensor in sensors:
+			if sensor[0] == sensor_num:
+				temp_sensor = sensor
+		if temp_sensor is None:
+			print("Sensor not found")
+		else:
+			if temp_sensor[2] == "y":
+				query = f"UPDATE sensors SET active='n' WHERE id={temp_sensor[0]}"
+			else:
+				query = f"UPDATE sensors SET active='y' WHERE id={temp_sensor[0]}"
+			mngr.execute_mysql(query, [])
+			print("Sensor updated")
 	elif uinp == "get values":
 		table = input("Which table would you like the values from? ")
 		for entry in getvals(table):
