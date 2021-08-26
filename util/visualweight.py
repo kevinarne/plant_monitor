@@ -12,6 +12,9 @@ mngr = sqlmanager.MySqlManager(decouple.config('DB_NAME'))
 def filter_zeros(data, tolerance=100):
     return [entry for entry in data if int(entry[VAL_IND]) > tolerance]
 
+def filter_extremes(data, cutoff=2000):
+    return [entry for entry in data if int(entry[VAL_IND]) < cutoff]
+
 def fix_iso(data):
     new_data = []
     for row in data:
@@ -43,7 +46,7 @@ def adjust_start(data, strt=None, end=None):
 if __name__ == "__main__":
     sense_data = mngr.execute_mysql('SELECT datetime, val FROM plant_events WHERE code=8 AND plant=2', [])
 
-    sense_data = fix_iso(filter_zeros(sense_data))
+    sense_data = fix_iso(filter_extremes(filter_zeros(sense_data)))
 
     sensex = [entry[DATETIME_IND] for entry in sense_data]
     sensey = [int(entry[VAL_IND]) / 100.0 for entry in sense_data]
