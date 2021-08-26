@@ -1,4 +1,4 @@
-# Pull data from the database and put it into simple csv formats.
+import datetime
 from sqlmanager import MySqlManager
 mngr = MySqlManager("lights")
 
@@ -34,4 +34,4 @@ filename = input("What would you like to name this file?\n")
 
 with open(filename+".csv", "a") as f:
     for val in vals:
-        f.write(f"{val[0][0:19]}, {val[1] / 100}\n")
+        f.write(f"{datetime.datetime.fromisoformat(val[0][0:19]).isoformat()}, {val[1] / 100}\n")
