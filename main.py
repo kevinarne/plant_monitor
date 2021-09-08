@@ -109,7 +109,7 @@ while True:
 			print("Sensor updated")
 	elif uinp == "get values":
 		table = input("Which table would you like the values from? ")
-		for entry in getvals(table):
+		for entry in mngr.export_table(table):
 			print(entry)
 	elif uinp == "plant status":
 		print("Available plants: ")
