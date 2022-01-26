@@ -1,3 +1,4 @@
+from flask import render_template
 from plantflask import app, db
 
 @app.route("/")
@@ -6,14 +7,14 @@ def home():
 
 @app.route("/login")
 def login():
-    return "Login page"
+    return render_template("login.html", title="Title")
 
 # A web page interface to add plant weights
 @app.route("/addweight")
 def addweight():
     return "Add weight user interface"
 
-# Displays the status of all
+# Displays the status of all plants
 @app.route("/status")
 def status():
     return "Plant statuses or stati"
